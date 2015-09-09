@@ -1,7 +1,10 @@
 package fwk;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -14,6 +17,7 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchWindowException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -519,6 +523,30 @@ public class WebFwk extends UiClass {
 			log("The alert is '" + alertText + "'.");
 
 		return alertText;
+	}
+
+	public void switchToNewWindow() {
+
+		String currentHandle = driver.getWindowHandle();
+		Set<String> handles = driver.getWindowHandles();
+		Iterator<String> it = handles.iterator();
+		while (it.hasNext()) {
+			if (currentHandle == it.next())
+				continue;
+			driver.switchTo().window(it.next());
+		}
+	}
+
+	public void switchToPromptWindow(Set<String> before, Set<String> after) {
+
+		List<String> whs = new ArrayList<String>(after);
+		whs.removeAll(before);
+		whs.remove("");
+		if (whs.size() > 0) {
+			driver.switchTo().window(whs.get(0));
+		} else {
+			throw new WebDriverException("No new window prompted out.");
+		}
 	}
 
 }

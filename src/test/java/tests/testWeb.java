@@ -14,13 +14,13 @@ public class testWeb {
 		web = new WebFwk();
 		web.openApp();
 
-		web.verifyIsShown("logo");
-		web.verifyIsShown("输入内容");
-		web.setValueTo("输入内容", "test");
-		web.clickOn("百度一下");
+		web.isDisplay("logo");
+		web.isDisplay("输入内容");
+		web.sendKey("输入内容", "test");
+		web.click("百度一下");
 
-		web.verifyIsShown("搜索结果");
-		web.log(web.getValueOf("搜索结果"));
+		web.isDisplay("搜索结果");
+		web.log(web.getText("搜索结果"));
 
 		web.close();
 	}

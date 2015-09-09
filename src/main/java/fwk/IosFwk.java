@@ -85,7 +85,7 @@ public class IosFwk extends UiClass {
 			if (num > 10)
 				break;
 		}
-		verifyIsShown(elementName);
+		isDisplay(elementName);
 	}
 
 	private void swipeTo(int startX, int startY, int endX, int endY, int duration) {

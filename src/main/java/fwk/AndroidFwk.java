@@ -143,7 +143,7 @@ public class AndroidFwk extends UiClass {
 			if (num > 10)
 				break;
 		}
-		verifyIsShown(elementName);
+		isDisplay(elementName);
 	}
 
 	private void swipeTo(int startX, int startY, int endX, int endY, int duration) {
@@ -521,7 +521,7 @@ public class AndroidFwk extends UiClass {
 	}
 
 	@Override
-	public String getValueOf(String elementName) {
+	public String getText(String elementName) {
 
 		String text = "";
 		waitForElement(elementName);
@@ -533,7 +533,7 @@ public class AndroidFwk extends UiClass {
 	}
 
 	@Override
-	public String getValueOf(String elementName, int itemMatching) {
+	public String getText(String elementName, int itemMatching) {
 
 		String text = "";
 		waitForElement(elementName, itemMatching, "");

@@ -11,7 +11,6 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +25,6 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
@@ -149,17 +147,17 @@ public abstract class UiClass extends IniClass {
 		return false;
 	}
 
-	public boolean clickOn(String elementName) {
+	public boolean click(String elementName) {
 
-		return clickOn(elementName, "", "", "");
+		return click(elementName, "", "", "");
 	}
 
-	public boolean clickOn(String listName, int itemMatching) {
+	public boolean click(String listName, int itemMatching) {
 
-		return clickOn(listName, itemMatching, "", "");
+		return click(listName, itemMatching, "", "");
 	}
 
-	private boolean clickOn(String listName, Object itemMatching, String elementName, String message) {
+	private boolean click(String listName, Object itemMatching, String elementName, String message) {
 
 		boolean returnValue = false;
 
@@ -223,17 +221,17 @@ public abstract class UiClass extends IniClass {
 			returnValue = true;
 			if (!StringUtils.isEmpty(message)) {
 
-				returnValue = verifyIsShown(message);
+				returnValue = isDisplay(message);
 
 				if (!returnValue) {
-					returnValue = verifyIsShown(message);
+					returnValue = isDisplay(message);
 				}
 			}
 
 			return returnValue;
 		}
 
-		Assert.fail("FAIL uiMapClickOnLocatorAndSetView() - Could not find '" + (elementName.isEmpty() ? listName : elementName)
+		Assert.fail("FAIL uiMapclickLocatorAndSetView() - Could not find '" + (elementName.isEmpty() ? listName : elementName)
 				+ "'.");
 		return returnValue;
 	}
@@ -270,23 +268,23 @@ public abstract class UiClass extends IniClass {
 		return returnValue;
 	}
 
-	public boolean setViewTo(String requestedView) {
+	public boolean viewTo(String requestedView) {
 
-		boolean setViewTo = uiMapSetView(requestedView);
-		return setViewTo;
+		boolean viewTo = uiMapSetView(requestedView);
+		return viewTo;
 	}
 
-	public String getValueOf(String elementName) {
+	public String getText(String elementName) {
 
-		return getValueOf(elementName, "", "", "");
+		return getText(elementName, "", "", "");
 	}
 
-	public String getValueOf(String listName, int itemMatching) {
+	public String getText(String listName, int itemMatching) {
 
-		return getValueOf(listName, itemMatching, "", "");
+		return getText(listName, itemMatching, "", "");
 	}
 
-	private String getValueOf(String listName, Object itemMatching, String elementName, String attribute) {
+	private String getText(String listName, Object itemMatching, String elementName, String attribute) {
 
 		String actualValue = "";
 
@@ -329,14 +327,14 @@ public abstract class UiClass extends IniClass {
 				if (!actualValue.isEmpty())
 					log("get '" + (elementName.isEmpty() ? listName : elementName) + "' tagName is '" + actualValue + "'.");
 				else
-					log("getValueOf() '" + (elementName.isEmpty() ? listName : elementName) + "' is Empty!");
+					log("getText() '" + (elementName.isEmpty() ? listName : elementName) + "' is Empty!");
 			} else {
 
 				actualValue = StringUtils.defaultString(getElement(listName, itemMatching, elementName).getAttribute(attribute));
 				if (!actualValue.isEmpty())
 					log("get '" + (elementName.isEmpty() ? listName : elementName) + "' tagName is '" + actualValue + "'.");
 				else
-					log("getValueOf() '" + (elementName.isEmpty() ? listName : elementName) + "' is Empty!");
+					log("getText() '" + (elementName.isEmpty() ? listName : elementName) + "' is Empty!");
 			}
 
 			actualValue = actualValue.replaceAll("\n", "");
@@ -345,7 +343,7 @@ public abstract class UiClass extends IniClass {
 		}
 
 		if (StringUtils.isEmpty(actualValue))
-			log("getValueOf() - Unable to locate element '" + (elementName.isEmpty() ? listName : elementName) + "' "
+			log("getText() - Unable to locate element '" + (elementName.isEmpty() ? listName : elementName) + "' "
 					+ elementLocator + "in current view " + uiMapCurrentView.path("viewName") + ".", 2);
 		return actualValue;
 
@@ -394,7 +392,7 @@ public abstract class UiClass extends IniClass {
 		}
 	}
 
-	public String getElementAttribute(String listName, int itemMatching, String elementName, String attribute) {
+	public String getAttribute(String listName, int itemMatching, String elementName, String attribute) {
 
 		waitForElement(listName, itemMatching, elementName);
 		String returnValue = getElement(listName, itemMatching, elementName).getAttribute(attribute);
@@ -403,14 +401,14 @@ public abstract class UiClass extends IniClass {
 		return returnValue;
 	}
 
-	public String getElementAttribute(String listName, int itemMatching, String attribute) {
+	public String getAttribute(String listName, int itemMatching, String attribute) {
 
-		return getElementAttribute(listName, itemMatching, "", attribute);
+		return getAttribute(listName, itemMatching, "", attribute);
 	}
 
-	public String getElementAttribute(String elementName, String attribute) {
+	public String getAttribute(String elementName, String attribute) {
 
-		return getElementAttribute(elementName, 0, "", attribute);
+		return getAttribute(elementName, 0, "", attribute);
 	}
 
 	private boolean operateOnEveryElementType(String listName, Object itemMatching, String elementName, String elementType,
@@ -469,7 +467,7 @@ public abstract class UiClass extends IniClass {
 		return returnValue;
 	}
 
-	private boolean setValueTo(String listName, Object itemMatching, String elementName, String value) {
+	private boolean sendKey(String listName, Object itemMatching, String elementName, String value) {
 
 		boolean returnValue = false;
 		if (waitForElement(listName, itemMatching, elementName)) {
@@ -478,26 +476,26 @@ public abstract class UiClass extends IniClass {
 		}
 
 		if (!returnValue) {
-			log("setValueTo() - Could not set '" + (elementName.isEmpty() ? listName : elementName) + "' " + value
+			log("sendKey() - Could not set '" + (elementName.isEmpty() ? listName : elementName) + "' " + value
 					+ "' in current view '" + uiMapCurrentView.path("viewName") + "'.", 2);
-			throw new RuntimeException("setValueTo() - Could not set '" + (elementName.isEmpty() ? listName : elementName)
-					+ "' '" + locator + "' to '" + value + "' in current view " + uiMapCurrentView.path("viewName") + ".");
+			throw new RuntimeException("sendKey() - Could not set '" + (elementName.isEmpty() ? listName : elementName) + "' '"
+					+ locator + "' to '" + value + "' in current view " + uiMapCurrentView.path("viewName") + ".");
 		} else
 			log("Value '" + value + "' is set for '" + (elementName.isEmpty() ? listName : elementName) + "'.");
 		return returnValue;
 	}
 
-	public boolean setValueTo(String elementName, String value) {
+	public boolean sendKey(String elementName, String value) {
 
-		return setValueTo(elementName, "", "", value);
+		return sendKey(elementName, "", "", value);
 	}
 
-	public boolean setValueTo(String listName, int itemMatching, String value) {
+	public boolean sendKey(String listName, int itemMatching, String value) {
 
-		return setValueTo(listName, itemMatching, "", value);
+		return sendKey(listName, itemMatching, "", value);
 	}
 
-	private boolean verifyIsShown(String listName, Object itemMatching, String elementNameOrMessage, boolean isShown) {
+	private boolean isDisplay(String listName, Object itemMatching, String elementNameOrMessage, boolean isShown) {
 
 		String errorMessage = "";
 		String elementLocator = "";
@@ -532,14 +530,14 @@ public abstract class UiClass extends IniClass {
 		if (isShown) {
 
 			if (elementNameOrMessage.isEmpty())
-				errorMessage = "FAIL verifyIsShown() - Could not find '" + expectedText + "' ";
+				errorMessage = "FAIL isDisplay() - Could not find '" + expectedText + "' ";
 			else
-				errorMessage = "FAIL verifyIsShown() - Could not find '" + elementNameOrMessage + "' ";
+				errorMessage = "FAIL isDisplay() - Could not find '" + elementNameOrMessage + "' ";
 		} else {
 			if (elementNameOrMessage.isEmpty())
-				errorMessage = "FAIL verifyIsNotShown() - Found '" + expectedText + "' ";
+				errorMessage = "FAIL isNotDisplay() - Found '" + expectedText + "' ";
 			else
-				errorMessage = "FAIL verifyIsNotShown() - Found '" + elementNameOrMessage + "' ";
+				errorMessage = "FAIL isNotDisplay() - Found '" + elementNameOrMessage + "' ";
 			returnValue = !returnValue;
 		}
 
@@ -548,24 +546,24 @@ public abstract class UiClass extends IniClass {
 		return verifyIsTrue(returnValue, errorMessage);
 	}
 
-	public boolean verifyIsNotShown(String elementName) {
+	public boolean isNotDisplay(String elementName) {
 
-		return verifyIsShown(elementName, "", "", false);
+		return isDisplay(elementName, "", "", false);
 	}
 
-	public boolean verifyIsNotShown(String listName, int itemMatching) {
+	public boolean isNotDisplay(String listName, int itemMatching) {
 
-		return verifyIsShown(listName, itemMatching, "", false);
+		return isDisplay(listName, itemMatching, "", false);
 	}
 
-	public boolean verifyIsShown(String elementNameOrMessage) {
+	public boolean isDisplay(String elementNameOrMessage) {
 
-		return verifyIsShown(elementNameOrMessage, "", "", true);
+		return isDisplay(elementNameOrMessage, "", "", true);
 	}
 
-	public boolean verifyIsShown(String listName, int itemMatching) {
+	public boolean isDisplay(String listName, int itemMatching) {
 
-		return verifyIsShown(listName, itemMatching, "", true);
+		return isDisplay(listName, itemMatching, "", true);
 	}
 
 	public boolean verifyURL(String expectedPageURL) {
@@ -898,7 +896,7 @@ public abstract class UiClass extends IniClass {
 
 		if (!pathToRequestedView.isEmpty()) {
 
-			log("Using setViewTo() to navigate to '" + requestedView + "'.");
+			log("Using viewTo() to navigate to '" + requestedView + "'.");
 
 			uiMapWalkToRequestedView(pathToRequestedView);
 			returnValue = true;
@@ -1209,12 +1207,12 @@ public abstract class UiClass extends IniClass {
 
 			if (StringUtils.contains(clickMe, UIMAP_DELIM) && !StringUtils.contains(clickMe, "gestures")) {
 				clickMe = clickMe.split(UIMAP_DELIM)[1];
-				if (!clickOn(clickMe))
+				if (!click(clickMe))
 					break;
 			} else {
 				clickMe = clickMe.split(UIMAP_DELIM)[1];
 				if (StringUtils.contains(clickMe, "home") || StringUtils.contains(clickMe, "back")) {
-					if (!clickOn(clickMe))
+					if (!click(clickMe))
 						break;
 				} else {
 					if (!swipe(clickMe))
@@ -1825,30 +1823,6 @@ public abstract class UiClass extends IniClass {
 		return elements.size();
 	}
 
-	public void switchPopupNewWindow() {
-
-		String currentHandle = driver.getWindowHandle();
-		Set<String> handles = driver.getWindowHandles();
-		Iterator<String> it = handles.iterator();
-		while (it.hasNext()) {
-			if (currentHandle == it.next())
-				continue;
-			driver.switchTo().window(it.next());
-		}
-	}
-
-	public void switchToPromptWindow(Set<String> before, Set<String> after) {
-
-		List<String> whs = new ArrayList<String>(after);
-		whs.removeAll(before);
-		whs.remove("");
-		if (whs.size() > 0) {
-			driver.switchTo().window(whs.get(0));
-		} else {
-			throw new WebDriverException("No new window prompted out.");
-		}
-	}
-
 	protected String getTargetView(String type, String elementName, String direction) {
 
 		String targetView = "";
@@ -1889,21 +1863,21 @@ public abstract class UiClass extends IniClass {
 
 	}
 
-	public boolean isElementNotEnabled(String listName, int itemMatching) {
+	public boolean isNotEnabled(String listName, int itemMatching) {
 
-		return !isElementEnabled(listName, itemMatching);
+		return !isEnabled(listName, itemMatching);
 	}
 
-	public boolean isElementNotEnabled(String elementName) {
+	public boolean isNotEnabled(String elementName) {
 
-		return !isElementEnabled(elementName);
+		return !isEnabled(elementName);
 	}
 
 	private void waitForElementEnabled(String listName, Object itemMatching, String elementName) {
 
 		boolean returnValue = false;
 		for (int i = 0; i < Long.parseLong(elementTimeout) / 1000; i++) {
-			returnValue = isElementEnabled(listName, itemMatching, elementName);
+			returnValue = isEnabled(listName, itemMatching, elementName);
 			waitByTimeout(1000);
 			if (returnValue)
 				break;
@@ -1925,17 +1899,17 @@ public abstract class UiClass extends IniClass {
 		waitForElementEnabled(elementName, "", "");
 	}
 
-	private boolean isElementEnabled(String listName, Object itemMatching, String elementName) {
+	private boolean isEnabled(String listName, Object itemMatching, String elementName) {
 
 		return getElement(listName, itemMatching, elementName).isEnabled();
 	}
 
-	public boolean isElementEnabled(String listName, int itemMatching) {
+	public boolean isEnabled(String listName, int itemMatching) {
 
 		return getElement(listName, itemMatching, "").isEnabled();
 	}
 
-	public boolean isElementEnabled(String elementName) {
+	public boolean isEnabled(String elementName) {
 
 		return getElement(elementName, "", "").isEnabled();
 	}
