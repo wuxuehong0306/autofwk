@@ -1,0 +1,28 @@
+{
+	"application":{
+	    "properties":{
+			"App Name":"baidu",
+			"defaultPage":"百度"
+		},
+		"pages":[
+			{
+				"properties":{"pageName":"百度","path":"/","defaultView":"百度首页"},
+				"views":[
+					{"viewName":"百度首页","defaultArea":"百度首页","activeAreas":["百度首页"]}
+
+				],
+				"areas":[
+					{
+						"areaName":"百度首页","locator":"",
+						"elements":[    
+							{"elementName":"logo",          "locator":"<css>=#lg>img"},
+							{"elementName":"输入内容",      "locator":"<id>=kw"},
+							{"elementName":"百度一下",      "locator":"<id>=su"},
+							{"elementName":"搜索结果",      "locator":"<css>=.nums"}
+						]
+					}
+				]
+			}
+		]
+	}
+}
