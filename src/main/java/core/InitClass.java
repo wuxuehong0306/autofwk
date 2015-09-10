@@ -27,7 +27,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public abstract class IniClass {
+public abstract class InitClass {
 
 	static {
 		disableLog4jLogs();
@@ -43,7 +43,6 @@ public abstract class IniClass {
 	protected String pageTimeout = "30000";
 	protected String viewTimeout = "20000";
 	protected String elementTimeout = "15000";
-	// protected String playbackSpeed = "200";
 
 	protected String appUrl = "";
 	protected String appLocale = "";
@@ -56,7 +55,7 @@ public abstract class IniClass {
 
 	protected abstract String getAppType();
 
-	protected IniClass() {
+	protected InitClass() {
 
 		log(">==================================================<");
 		try {

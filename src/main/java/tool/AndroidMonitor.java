@@ -6,9 +6,9 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 
-import core.IniClass;
+import core.InitClass;
 
-public class AndroidMonitor extends IniClass {
+public class AndroidMonitor extends InitClass {
 
 	private static String PID(String PackageName) {
 

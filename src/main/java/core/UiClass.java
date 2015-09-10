@@ -38,7 +38,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.thoughtworks.selenium.HttpCommandProcessor;
 
 @SuppressWarnings({ "deprecation", "rawtypes" })
-public abstract class UiClass extends IniClass {
+public abstract class UiClass extends InitClass {
 
 	private String iFrameName = "";
 	private String iFrameAreaName = "";
