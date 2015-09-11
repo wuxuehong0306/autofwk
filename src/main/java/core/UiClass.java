@@ -33,6 +33,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import tool.parseExcel;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.thoughtworks.selenium.HttpCommandProcessor;
@@ -170,7 +172,7 @@ public abstract class UiClass extends InitClass {
 		returnValue = clickElement(listName, itemMatching, elementName, activator, message);
 
 		if (returnValue) {
-			returnValue = uiMapUpdated(view);
+			returnValue = updateUiMap(view);
 		} else {
 			throw new RuntimeException("Element clicking Error.");
 		}
@@ -236,7 +238,7 @@ public abstract class UiClass extends InitClass {
 		return returnValue;
 	}
 
-	protected boolean uiMapUpdated(String view) {
+	protected boolean updateUiMap(String view) {
 
 		boolean returnValue = false;
 		if (StringUtils.isEmpty(view)) {
@@ -1999,5 +2001,47 @@ public abstract class UiClass extends InitClass {
 	private boolean swipe(String direction) {
 
 		return false;
+	}
+
+	public void runTest(String sheetName) {
+
+		runTest("", sheetName);
+	}
+
+	public void runTest(String file, String sheetName) {
+
+		parseExcel pe = new parseExcel();
+		String excelFile = getProperty("app.case.file");
+		file = excelFile.isEmpty() ? file : excelFile;
+		String action = "";
+		String element = "";
+		String value = "";
+
+		ArrayList<String> steps = pe.getSteps(excelFile, sheetName);
+		for (String step : steps) {
+			if (!step.contains(":"))
+				throw new RuntimeException("The Excel format is incorrect.");
+			action = step.split(":")[0];
+			String elementstr = step.split(":", 2)[1];
+			if (elementstr.contains(":")) {
+				element = elementstr.split(":")[0];
+				value = elementstr.split(":")[1];
+			} else
+				element = elementstr;
+			if (action.equals("isDisplay"))
+				if (value.isEmpty())
+					isDisplay(element);
+				else
+					isDisplay(element, Integer.parseInt(value));
+			if (action.equals("sendKey"))
+				sendKey(element, value);
+			if (action.equals("click"))
+				if (value.isEmpty())
+					click(element);
+				else
+					click(element, Integer.parseInt(value));
+			value = "";
+
+		}
 	}
 }

@@ -289,7 +289,7 @@ public class IosFwk extends UiClass {
 			waitForElement(itemList, itemMatching, "");
 			tap(1, itemList, itemMatching, pressTime);
 		}
-		returnValue = uiMapUpdated(view);
+		returnValue = updateUiMap(view);
 		if (!returnValue) {
 			throw new RuntimeException("uiMap Update Error.");
 		}
@@ -307,7 +307,7 @@ public class IosFwk extends UiClass {
 
 		String swipeToView = getTargetView("gestures", "", direction);
 		swipeOfType(direction);
-		return uiMapUpdated(swipeToView);
+		return updateUiMap(swipeToView);
 	}
 
 	public boolean tapOn(String elementName) {

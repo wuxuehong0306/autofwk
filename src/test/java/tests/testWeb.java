@@ -24,4 +24,12 @@ public class testWeb {
 
 		web.close();
 	}
+
+	@Test
+	public void test020getStepFromExcel() {
+
+		web = new WebFwk();
+		web.openApp();
+		web.runTest("Homepage");
+	}
 }

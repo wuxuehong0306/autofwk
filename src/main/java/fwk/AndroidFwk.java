@@ -390,7 +390,7 @@ public class AndroidFwk extends UiClass {
 			waitForElement(itemList, itemMatching, "");
 			tap(1, itemList, itemMatching, pressTime);
 		}
-		returnValue = uiMapUpdated(view);
+		returnValue = updateUiMap(view);
 		if (!returnValue) {
 			takeFullScreenShot(elementName.isEmpty() ? itemList : elementName);
 			throw new RuntimeException("uiMap Update Error.");
@@ -411,7 +411,7 @@ public class AndroidFwk extends UiClass {
 		swipeOfType(direction);
 		// if (!swipeToView.isEmpty())
 		// log("swipe to view :" + swipeToView, 1);
-		return uiMapUpdated(swipeToView);
+		return updateUiMap(swipeToView);
 	}
 
 	public boolean tapOn(String elementName) {
