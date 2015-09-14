@@ -3,18 +3,13 @@ package tool;
 import java.io.File;
 import java.util.ArrayList;
 
-import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 
 public class parseExcel {
 
-	private Sheet sheet;
 	private Workbook book;
-	private Cell cell;
-	private int sheetCount;
 	private String ExcelPath;
-	private ArrayList<String> steps = new ArrayList<String>();
 
 	private String excelPath(String ExcelPath) {
 
@@ -30,7 +25,6 @@ public class parseExcel {
 	private Sheet createSteps(String sheetName) {
 
 		Sheet sheet = book.getSheet(sheetName);
-		this.sheet = sheet;
 
 		String action = sheet.getCell(0, 0).getContents();
 		String element = sheet.getCell(1, 0).getContents();

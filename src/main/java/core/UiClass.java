@@ -2018,16 +2018,22 @@ public abstract class UiClass extends InitClass {
 		String value = "";
 
 		ArrayList<String> steps = pe.getSteps(excelFile, sheetName);
+
 		for (String step : steps) {
+
 			if (!step.contains(":"))
-				throw new RuntimeException("The Excel format is incorrect.");
-			action = step.split(":")[0];
-			String elementstr = step.split(":", 2)[1];
-			if (elementstr.contains(":")) {
-				element = elementstr.split(":")[0];
-				value = elementstr.split(":")[1];
-			} else
-				element = elementstr;
+				action = step;
+			else {
+				action = step.split(":")[0];
+				String elementstr = step.split(":", 2)[1];
+
+				if (elementstr.contains(":")) {
+					element = elementstr.split(":")[0];
+					value = elementstr.split(":")[1];
+				} else
+					element = elementstr;
+			}
+
 			if (action.equals("isDisplay"))
 				if (value.isEmpty())
 					isDisplay(element);
@@ -2040,6 +2046,7 @@ public abstract class UiClass extends InitClass {
 					click(element);
 				else
 					click(element, Integer.parseInt(value));
+
 			value = "";
 
 		}
