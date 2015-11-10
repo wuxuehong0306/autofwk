@@ -72,7 +72,7 @@ public class AndroidFwk extends UiClass {
 			capabilities.setCapability("deviceName", getProperty("app.device.name"));
 			capabilities.setCapability("platformName", getProperty("app.device.platformName"));
 			capabilities.setCapability("newCommandTimeout", getProperty("app.command.timeout"));
-			capabilities.setCapability("app", app.getAbsolutePath());
+			// capabilities.setCapability("app", app.getAbsolutePath());
 			capabilities.setCapability("appPackage", getProperty("app.package"));
 			capabilities.setCapability("appActivity", getProperty("app.activity"));
 			capabilities.setCapability("appWaitActivity", getProperty("app.wait.activity"));

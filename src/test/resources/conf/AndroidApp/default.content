@@ -1,0 +1,10 @@
+# =================================================================================================
+# AST Messages - US English (default) strings used for Lifesaver Web App messages and page content.
+# 
+# NOTE: dcooper 2013-12-09 - Should be provided by Dev, but is currently blank.  See AST Content
+#       for an initial version of strings & URLs.
+#
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+# =================================================================================================
+homepage.message.1 = upchina.com
