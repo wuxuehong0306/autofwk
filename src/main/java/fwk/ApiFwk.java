@@ -19,6 +19,7 @@ import org.apache.http.util.EntityUtils;
 
 import core.UiClass;
 
+@SuppressWarnings("deprecation")
 public class ApiFwk extends UiClass {
 
 	private HttpClient client = null;
@@ -40,10 +41,21 @@ public class ApiFwk extends UiClass {
 		return "API";
 	}
 
+	public ApiFwk(String method) {
+
+		apiUrl = getProperty("app.url");
+		this.method = method;
+	}
+
 	public ApiFwk(String apiUrl, String method) {
 
 		this.apiUrl = apiUrl;
 		this.method = method;
+	}
+
+	public void runTest() {
+
+		execute();
 	}
 
 	/**
@@ -216,7 +228,7 @@ public class ApiFwk extends UiClass {
 		return response.getHeaders(headerName);
 	}
 
-	public int loadResponseCode() {
+	public int getResponseCode() {
 
 		try {
 			if (response.getStatusLine() != null) {
@@ -231,7 +243,7 @@ public class ApiFwk extends UiClass {
 
 	}
 
-	public String loadResponseBody() {
+	public String getResponseBody() {
 
 		try {
 			if (response.getStatusLine() != null) {
