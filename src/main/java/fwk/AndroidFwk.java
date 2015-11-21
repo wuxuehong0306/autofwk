@@ -284,7 +284,7 @@ public class AndroidFwk extends UiClass {
 
 	public void sendKey(int key) {
 
-		androidDriver.sendKeyEvent(key);
+		androidDriver.pressKeyCode(key);
 	}
 
 	public void closeKeyWord() {
@@ -295,13 +295,13 @@ public class AndroidFwk extends UiClass {
 
 	public void back() {
 
-		androidDriver.sendKeyEvent(AndroidKeyCode.BACK);
+		androidDriver.pressKeyCode(AndroidKeyCode.BACK);
 
 	}
 
 	public void home() {
 
-		androidDriver.sendKeyEvent(AndroidKeyCode.HOME);
+		androidDriver.pressKeyCode(AndroidKeyCode.HOME);
 	}
 
 	public void rotate() {
