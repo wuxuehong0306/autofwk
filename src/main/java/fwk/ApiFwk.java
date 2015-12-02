@@ -16,6 +16,9 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.util.EntityUtils;
+import org.testng.Assert;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 import core.UiClass;
 
@@ -53,9 +56,9 @@ public class ApiFwk extends UiClass {
 		this.method = method;
 	}
 
-	public void runTest() {
+	public String runTest() {
 
-		execute();
+		return execute();
 	}
 
 	/**
@@ -148,8 +151,9 @@ public class ApiFwk extends UiClass {
 	 *         Returns an instance of HttpResponse.
 	 */
 
-	public HttpResponse execute() {
+	public String execute() {
 
+		String resBody = "";
 		try {
 
 			client = new DefaultHttpClient();
@@ -209,6 +213,7 @@ public class ApiFwk extends UiClass {
 				}
 				response = client.execute(delete);
 			}
+			resBody = EntityUtils.toString(response.getEntity());
 
 		} catch (Exception e) {
 		}
@@ -220,7 +225,8 @@ public class ApiFwk extends UiClass {
 			throw new RuntimeException();
 		}
 		client.getConnectionManager().shutdown();
-		return response;
+
+		return resBody;
 	}
 
 	public Header[] getHeaders(String headerName) {
@@ -248,6 +254,7 @@ public class ApiFwk extends UiClass {
 		try {
 			if (response.getStatusLine() != null) {
 				body = EntityUtils.toString(response.getEntity());
+				log("Http reponse body is: " + body, 2);
 			} else {
 				body = "";
 			}
@@ -256,6 +263,36 @@ public class ApiFwk extends UiClass {
 		}
 		return body;
 
+	}
+
+	public JsonNode parseJson(String key) {
+
+		JsonNode target = null;
+		try {
+
+			JsonNode bodyNode = jsonMapper.readValue(body, JsonNode.class);
+
+			if (bodyNode.has(key))
+				target = bodyNode;
+
+			if (target == null) {
+				for (JsonNode temp : bodyNode) {
+					for (JsonNode tempChild : temp) {
+						if (tempChild.has(key)) {
+							target = tempChild;
+							break;
+						}
+
+					}
+					if (target != null)
+						break;
+				}
+			}
+		} catch (Exception e) {
+
+		}
+		Assert.assertNotNull(target, "Incorrect response body. The key  '" + key + "' is not exesiting.");
+		return target;
 	}
 
 }
