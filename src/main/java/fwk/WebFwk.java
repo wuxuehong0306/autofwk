@@ -81,7 +81,7 @@ public class WebFwk extends UiClass {
 
 			return getBrowserProfileProperty("profile.firefox", profileName);
 
-		} else if (browserName.matches(".*iexplore.*")) {
+		} else if (browserName.matches(".*ie.*")) {
 			return getBrowserProfileProperty("profile.iexplore");
 		} else if (browserName.matches(".*chrome.*")) {
 			return getBrowserProfileProperty("profile.chrome");
