@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import jxl.Sheet;
 import jxl.Workbook;
 
-public class parseExcel {
+public class ParseExcel {
 
 	private Workbook book;
 	private String ExcelPath;

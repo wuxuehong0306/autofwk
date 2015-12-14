@@ -26,7 +26,7 @@ public class IosFwk extends UiClass {
 
 	protected String getAppType() {
 
-		return "IOSApp";
+		return "IOS";
 	}
 
 	@Override

@@ -33,7 +33,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import tool.parseExcel;
+import tool.ParseExcel;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -2010,7 +2010,7 @@ public abstract class UiClass extends InitClass {
 
 	public void runTest(String file, String sheetName) {
 
-		parseExcel pe = new parseExcel();
+		ParseExcel pe = new ParseExcel();
 		String excelFile = getProperty("app.case.file");
 		file = excelFile.isEmpty() ? file : excelFile;
 		String action = "";

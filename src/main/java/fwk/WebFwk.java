@@ -38,7 +38,7 @@ public class WebFwk extends UiClass {
 
 	protected String getAppType() {
 
-		return "WebApp";
+		return "Web";
 	}
 
 	@Override

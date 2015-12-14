@@ -34,7 +34,7 @@ public class AndroidFwk extends UiClass {
 
 	protected String getAppType() {
 
-		return "AndroidApp";
+		return "Android";
 	}
 
 	public boolean openApp() {
