@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import junit.framework.AssertionFailedError;
-
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -178,7 +176,7 @@ public class WebFwk extends UiClass {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 		String js = null;
 		if (!jsScript.contains("=")) {
-			throw new AssertionFailedError("The format of the navigate element is incorrect.");
+			throw new WebDriverException("The format of the navigate element is incorrect.");
 		}
 		if (jsScript.contains("id")) {
 
@@ -193,7 +191,7 @@ public class WebFwk extends UiClass {
 			js = "document.getElementsByTagName('" + jsScript + "').click()";
 			jsExecutor.executeScript(js);
 		} else {
-			throw new AssertionFailedError("The parameter jsScript should only be 'id' or 'tagname'.");
+			throw new WebDriverException("The parameter jsScript should only be 'id' or 'tagname'.");
 		}
 	}
 

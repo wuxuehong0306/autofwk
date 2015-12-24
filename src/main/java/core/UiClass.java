@@ -14,8 +14,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import junit.framework.AssertionFailedError;
-
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -1859,7 +1857,7 @@ public abstract class UiClass extends InitClass {
 				return getElementAtt("pressView", elementName);
 			}
 		} else {
-			throw new AssertionFailedError("The type is null");
+			throw new NullPointerException("The type is null");
 		}
 		return "";
 
