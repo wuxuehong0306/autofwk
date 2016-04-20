@@ -153,7 +153,7 @@ public class WebFwk extends UiClass {
 
 		log("Clicking 'Back' button");
 		driver.navigate().back();
-		waitByTimeout(Long.parseLong(pageTimeout));
+		waitFor(Long.parseLong(pageTimeout));
 		return;
 
 	}

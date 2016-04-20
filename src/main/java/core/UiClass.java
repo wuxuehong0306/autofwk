@@ -906,7 +906,7 @@ public abstract class UiClass extends InitClass {
 
 	private void waitForRequestViewToLoad(JsonNode currentPage) {
 
-		if (getAppType().equals("WebApp")) {
+		if (getAppType().equals("Web")) {
 			String uimapPath = currentPage.path("properties").path("path").textValue();
 			if (uimapPath.contains("://")) {
 				driver.get(uimapPath);
@@ -1248,7 +1248,7 @@ public abstract class UiClass extends InitClass {
 			if (isShown == returnValue) {
 				break;
 			}
-			waitByTimeout(500);
+			waitFor(500);
 		}
 
 		return returnValue;
@@ -1292,7 +1292,7 @@ public abstract class UiClass extends InitClass {
 
 	}
 
-	public void waitByTimeout(long waitFor) {
+	public void waitFor(long waitFor) {
 
 		try {
 			Thread.sleep(waitFor);
@@ -1878,7 +1878,7 @@ public abstract class UiClass extends InitClass {
 		boolean returnValue = false;
 		for (int i = 0; i < Long.parseLong(elementTimeout) / 1000; i++) {
 			returnValue = isEnabled(listName, itemMatching, elementName);
-			waitByTimeout(1000);
+			waitFor(1000);
 			if (returnValue)
 				break;
 		}

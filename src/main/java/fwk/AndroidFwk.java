@@ -138,7 +138,7 @@ public class AndroidFwk extends UiClass {
 		int num = 0;
 		while (!isElementShown(elementName)) {
 			swipe("up");
-			waitByTimeout(1000);
+			waitFor(1000);
 			num++;
 			if (num > 10)
 				break;
@@ -349,7 +349,7 @@ public class AndroidFwk extends UiClass {
 
 	public boolean tapOn(double x, double y) {
 
-		waitByTimeout(2000);
+		waitFor(2000);
 		boolean returnValue = false;
 		int windowlenX = androidDriver.manage().window().getSize().getWidth();
 		int windowlenY = androidDriver.manage().window().getSize().getHeight();
@@ -572,7 +572,7 @@ public class AndroidFwk extends UiClass {
 				if (isShown == returnValue) {
 					break;
 				}
-				waitByTimeout(500);
+				wait(500);
 			}
 		} catch (Exception e) {
 

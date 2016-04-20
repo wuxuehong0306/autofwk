@@ -15,10 +15,10 @@
 					{
 						"areaName":"百度首页","locator":"",
 						"elements":[    
-							{"elementName":"logo",          "locator":"<css>=#lg>img"},
+							{"elementName":"logo",       "locator":"<css>=#lg>img"},
 							{"elementName":"输入内容",      "locator":"<id>=kw"},
 							{"elementName":"百度一下",      "locator":"<id>=su"},
-							{"elementName":"搜索结果",      "locator":"<css>=.nums"}
+							{"elementName":"搜索结果",      "locator":"<id>=result_logo"}
 						]
 					}
 				]

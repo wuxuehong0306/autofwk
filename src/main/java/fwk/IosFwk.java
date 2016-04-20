@@ -80,7 +80,7 @@ public class IosFwk extends UiClass {
 		int num = 0;
 		while (!isElementShown(elementName)) {
 			swipe("up");
-			waitByTimeout(1000);
+			waitFor(1000);
 			num++;
 			if (num > 10)
 				break;
@@ -373,7 +373,7 @@ public class IosFwk extends UiClass {
 				if (isShown == returnValue) {
 					break;
 				}
-				waitByTimeout(500);
+				wait(500);
 			}
 		} catch (Exception e) {
 
